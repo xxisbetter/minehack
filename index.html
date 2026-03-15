@@ -84,46 +84,49 @@
     <div class="pagination" id="pagination">
         </div>
 
-    <script>
-        const productsPerPage = 20;
-        let currentPage = 1;
+   <script>
+    let allProducts = [];
+    const productsPerPage = 20;
 
-        // In a real Netlify setup, you'd fetch('products.json')
-        // For this example, here is your starter data
-        const products = Array.from({ length: 60 }, (_, i) => ({
-            name: "WAIT FOR YURI TO POST",
-            link: "#"
-        }));
+    // THIS PART READS YOUR DATABASE FILE
+    fetch('products.json')
+        .then(response => response.json())
+        .then(data => {
+            allProducts = data;
+            displayProducts(1); // Show page 1 once data is loaded
+        })
+        .catch(error => console.error('Error loading database:', error));
 
-        function displayProducts(page) {
-            const container = document.getElementById('product-container');
-            container.innerHTML = "";
-            
-            const start = (page - 1) * productsPerPage;
-            const end = start + productsPerPage;
-            const paginatedItems = products.slice(start, end);
+    function displayProducts(page) {
+        const container = document.getElementById('product-container');
+        container.innerHTML = "";
+        
+        const start = (page - 1) * productsPerPage;
+        const end = start + productsPerPage;
+        const paginatedItems = allProducts.slice(start, end);
 
-            paginatedItems.forEach(item => {
-                container.innerHTML += `
-                    <div class="card">
-                        <h3>${item.name}</h3>
-                        <a href="${item.link}" class="download-btn">DOWNLOAD</a>
-                        <div class="footer-tag">Cracked By Yuri</div>
-                    </div>
-                `;
-            });
-            updatePagination();
+        paginatedItems.forEach(item => {
+            container.innerHTML += `
+                <div class="card">
+                    <h3>${item.name}</h3>
+                    <a href="${item.link}" class="download-btn" target="_blank">DOWNLOAD</a>
+                    <div class="footer-tag">Cracked By Yuri</div>
+                </div>
+            `;
+        });
+        updatePagination();
+    }
+
+    function updatePagination() {
+        const nav = document.getElementById('pagination');
+        nav.innerHTML = "";
+        // This calculates how many pages you need based on your JSON size
+        const totalPages = Math.ceil(allProducts.length / productsPerPage);
+        
+        for (let i = 1; i <= totalPages; i++) {
+            nav.innerHTML += `<button class="page-link" onclick="displayProducts(${i})">${i}</button>`;
         }
-
-        function updatePagination() {
-            const nav = document.getElementById('pagination');
-            nav.innerHTML = "";
-            for (let i = 1; i <= 3; i++) {
-                nav.innerHTML += `<a href="#" class="page-link" onclick="displayProducts(${i})">${i}</a>`;
-            }
-        }
-
-        displayProducts(1);
-    </script>
+    }
+</script>
 </body>
 </html>
