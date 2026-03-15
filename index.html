@@ -84,21 +84,19 @@
     <div class="pagination" id="pagination">
         </div>
 
-   <script>
-    let allProducts = [];
-    const productsPerPage = 20;
+<script>
+    // COPY AND PASTE YOUR JSON DATA DIRECTLY HERE
+    const allProducts = [
+        { "name": "WAIT FOR YURI TO POST", "link": "https://link1.com" },
+        { "name": "WAIT FOR YURI TO POST", "link": "https://link2.com" },
+        // ... put all 60 here ...
+    ];
 
-    // THIS PART READS YOUR DATABASE FILE
-    fetch('products.json')
-        .then(response => response.json())
-        .then(data => {
-            allProducts = data;
-            displayProducts(1); // Show page 1 once data is loaded
-        })
-        .catch(error => console.error('Error loading database:', error));
+    const productsPerPage = 20;
 
     function displayProducts(page) {
         const container = document.getElementById('product-container');
+        if(!container) return;
         container.innerHTML = "";
         
         const start = (page - 1) * productsPerPage;
@@ -119,14 +117,16 @@
 
     function updatePagination() {
         const nav = document.getElementById('pagination');
+        if(!nav) return;
         nav.innerHTML = "";
-        // This calculates how many pages you need based on your JSON size
         const totalPages = Math.ceil(allProducts.length / productsPerPage);
-        
         for (let i = 1; i <= totalPages; i++) {
             nav.innerHTML += `<button class="page-link" onclick="displayProducts(${i})">${i}</button>`;
         }
     }
+
+    // Start the page
+    displayProducts(1);
 </script>
 </body>
 </html>
