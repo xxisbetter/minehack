@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuri's Downloads</title>
+    <style>
+        :root {
+            --main-red: #cc0000;
+            --dark-red: #8b0000;
+            --bg-black: #1a1a1a;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 { color: var(--main-red); text-align: center; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            background: #222;
+            border: 2px solid var(--main-red);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .card:hover { transform: scale(1.03); }
+
+        .download-btn {
+            display: inline-block;
+            background-color: var(--main-red);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .download-btn:hover { background-color: var(--dark-red); }
+
+        .footer-tag {
+            font-size: 10px;
+            color: #777;
+            margin-top: 15px;
+            border-top: 1px solid #333;
+            padding-top: 5px;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .page-link {
+            color: white;
+            background: var(--main-red);
+            padding: 8px 16px;
+            text-decoration: none;
+            margin: 5px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>VERDICT DOWNLOADS</h1>
+
+    <div id="product-container" class="grid"></div>
+
+    <div class="pagination" id="pagination">
+        </div>
+
+    <script>
+        const productsPerPage = 20;
+        let currentPage = 1;
+
+        // In a real Netlify setup, you'd fetch('products.json')
+        // For this example, here is your starter data
+        const products = Array.from({ length: 60 }, (_, i) => ({
+            name: "WAIT FOR YURI TO POST",
+            link: "#"
+        }));
+
+        function displayProducts(page) {
+            const container = document.getElementById('product-container');
+            container.innerHTML = "";
+            
+            const start = (page - 1) * productsPerPage;
+            const end = start + productsPerPage;
+            const paginatedItems = products.slice(start, end);
+
+            paginatedItems.forEach(item => {
+                container.innerHTML += `
+                    <div class="card">
+                        <h3>${item.name}</h3>
+                        <a href="${item.link}" class="download-btn">DOWNLOAD</a>
+                        <div class="footer-tag">Cracked By Yuri</div>
+                    </div>
+                `;
+            });
+            updatePagination();
+        }
+
+        function updatePagination() {
+            const nav = document.getElementById('pagination');
+            nav.innerHTML = "";
+            for (let i = 1; i <= 3; i++) {
+                nav.innerHTML += `<a href="#" class="page-link" onclick="displayProducts(${i})">${i}</a>`;
+            }
+        }
+
+        displayProducts(1);
+    </script>
+</body>
+</html>
