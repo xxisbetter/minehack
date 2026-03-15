@@ -10,7 +10,6 @@
             --dark-red: #8b0000;
             --bg-black: #1a1a1a;
             --card-bg: #222;
-            --discord-blue: #5865F2;
         }
 
         body {
@@ -19,156 +18,145 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
-            padding-bottom: 100px;
+            padding-bottom: 100px; /* Space for fixed discord button */
         }
 
-        h1 { color: var(--main-red); text-align: center; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
-        .subtitle { text-align: center; color: #777; font-size: 0.9rem; margin-bottom: 30px; }
-
-        /* Discord Floating Button */
+        h1 { color: var(--main-red); text-align: center; text-transform: uppercase; letter-spacing: 2px; }
+        
+        /* Discord Button */
         .discord-cta {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: var(--discord-blue);
+            bottom: 20px;
+            right: 20px;
+            background: #5865F2; /* Discord Blue */
             color: white;
             padding: 15px 25px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             z-index: 1000;
             transition: transform 0.2s, background 0.2s;
             display: flex;
             align-items: center;
             gap: 10px;
-            border: 1px solid rgba(255,255,255,0.1);
         }
-        .discord-cta:hover { transform: translateY(-5px); background: #4752c4; }
+        .discord-cta:hover { transform: scale(1.05); background: #4752c4; }
 
-        /* Fake Vouch Section */
+        /* Vouches Section */
         .vouch-container {
-            max-width: 900px;
-            margin: 0 auto 40px auto;
+            max-width: 1000px;
+            margin: 40px auto;
             background: #111;
             padding: 20px;
-            border-bottom: 2px solid var(--main-red);
-            border-radius: 8px;
+            border-left: 5px solid var(--main-red);
         }
-        .vouch-title { color: var(--main-red); font-weight: bold; margin-bottom: 15px; font-size: 1rem; text-align: center; }
-        .vouch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
-        .vouch { background: #1a1a1a; padding: 12px; border-radius: 4px; font-size: 0.85rem; border: 1px solid #333; }
-        .vouch-user { color: var(--main-red); font-weight: bold; margin-right: 5px; }
+        .vouch-title { color: var(--main-red); margin-bottom: 15px; font-size: 1.2rem; }
+        .vouch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .vouch { background: #222; padding: 10px; border-radius: 4px; font-size: 0.9rem; border: 1px solid #333; }
+        .vouch-user { color: var(--main-red); font-weight: bold; margin-bottom: 5px; display: block; }
 
-        /* Live Notification Popup */
-        .live-notify {
-            position: fixed;
-            bottom: 25px;
-            left: -350px; /* Hidden */
-            background: #252525;
-            border-left: 4px solid var(--main-red);
-            padding: 15px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 999;
-            min-width: 250px;
-        }
-        .live-notify.show { left: 25px; }
-        .v-icon { background: var(--main-red); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; }
-        #notify-text { font-size: 0.85rem; line-height: 1.4; }
-        #notify-text strong { color: var(--main-red); }
-
-        /* Product Grid */
+        /* Main Grid */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 20px;
         }
 
         .card {
             background: var(--card-bg);
-            border: 1px solid #333;
+            border: 2px solid var(--main-red);
             border-radius: 8px;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: transform 0.2s;
         }
-        .card:hover { transform: translateY(-5px); border-color: var(--main-red); box-shadow: 0 0 15px rgba(204, 0, 0, 0.3); }
-        .card h3 { margin: 10px 0; font-size: 1.1rem; }
+
+        .card:hover { transform: scale(1.03); border-color: white; }
 
         .download-btn {
-            display: block;
+            display: inline-block;
             background-color: var(--main-red);
             color: white;
-            padding: 12px;
+            padding: 10px 20px;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 5px;
             font-weight: bold;
-            margin-top: 15px;
-            transition: background 0.2s;
+            margin-top: 10px;
         }
+
         .download-btn:hover { background-color: var(--dark-red); }
 
-        .footer-tag { font-size: 11px; color: #666; margin-top: 15px; border-top: 1px solid #333; padding-top: 8px; font-style: italic; }
+        .footer-tag {
+            font-size: 10px;
+            color: #777;
+            margin-top: 15px;
+            border-top: 1px solid #333;
+            padding-top: 5px;
+        }
 
-        .pagination { text-align: center; margin-top: 40px; }
-        .page-link { color: white; background: #333; border: none; padding: 10px 18px; margin: 0 5px; border-radius: 4px; cursor: pointer; transition: background 0.2s; }
-        .page-link:hover { background: var(--main-red); }
+        .pagination {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .page-link {
+            color: white;
+            background: var(--main-red);
+            border: none;
+            padding: 8px 16px;
+            text-decoration: none;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
-    <a href="https://discord.gg/YOUR_INVITE" class="discord-cta" target="_blank">
-        <span>JOIN DISCORD</span>
+    <a href="https://discord.gg/YOUR_LINK" class="discord-cta" target="_blank">
+        <span>JOIN THE DISCORD</span>
     </a>
 
-    <div id="live-notification" class="live-notify">
-        <div class="v-icon">!</div>
-        <div id="notify-text"></div>
-    </div>
-
     <h1>MineHack Database</h1>
-    <div class="subtitle">Premium Minecraft Cracks by Yuri</div>
 
     <div class="vouch-container">
-        <div class="vouch-title">DIRECT FEEDBACK FROM DISCORD</div>
+        <div class="vouch-title">COMMUNITY VOUCHES (+500 Rep)</div>
         <div class="vouch-grid">
-            <div class="vouch"><span class="vouch-user">@Vexxed:</span> "Best dupe mods on the market. Yuri is a legend."</div>
-            <div class="vouch"><span class="vouch-user">@NullPointer:</span> "Finally a site that isn't full of malware. 10/10."</div>
-            <div class="vouch"><span class="vouch-user">@CrackedKing:</span> "DonutSMP dupe is working as of 2 hours ago!"</div>
-            <div class="vouch"><span class="vouch-user">@Shadow:</span> "Yuri's tools are mandatory for any SMP player."</div>
+            <div class="vouch">
+                <span class="vouch-user">@FastClicker99:</span>
+                "Yuri is the goat. DonutSMP dupe worked first try. No rats, just pure sauce."
+            </div>
+            <div class="vouch">
+                <span class="vouch-user">@ShadowDev:</span>
+                "The 1.20.1 crack is flawless. Yuri actually knows what he's doing unlike other skids."
+            </div>
+            <div class="vouch">
+                <span class="vouch-user">@VoidWalker:</span>
+                "Cleanest UI on a database site. Downloads are always fast."
+            </div>
+            <div class="vouch">
+                <span class="vouch-user">@LuvMinecraft:</span>
+                "Verified safe. Best products in the scene right now."
+            </div>
         </div>
     </div>
 
     <div id="product-container" class="grid"></div>
+
     <div class="pagination" id="pagination"></div>
 
 <script>
-    // PRODUCT DATA
     const allProducts = [
         { "name": "DonutSMPDupe-10.0.0", "link": "https://github.com/xxisbetter/minehackdrops/raw/refs/heads/main/DonutSMPDupe-10.0.0.jar" },
-        { "name": "000.jar_-1.20.1 (Fix)", "link": "https://github.com/xxisbetter/minehackdrops/raw/refs/heads/main/000.jar_-1.20.1-2.5-multiplayer-fix-CRACKED-BY-YURI-2.5.0.jar" },
-        { "name": "AutoCrystaller-V2", "link": "#" },
-        { "name": "BedrockBreaker-v4", "link": "#" },
-        { "name": "Yuri-Client-Lite", "link": "#" },
-        { "name": "NetherRoof-Exploit", "link": "#" },
-        { "name": "Server-Crasher-Beta", "link": "#" },
-        { "name": "AuthMe-Bypass-v2", "link": "#" },
-        { "name": "PacketCanceller", "link": "#" },
-        { "name": "GhostMode-1.20", "link": "#" }
+        { "name": "000.jar_-1.20.1", "link": "https://github.com/xxisbetter/minehackdrops/raw/refs/heads/main/000.jar_-1.20.1-2.5-multiplayer-fix-CRACKED-BY-YURI-2.5.0.jar" },
+        // Repeat items to fill up pagination
+        ...Array(18).fill({ "name": "WAIT FOR YURI TO POST", "link": "#" })
     ];
 
     const productsPerPage = 20;
 
-    // RENDER PRODUCTS
     function displayProducts(page) {
         const container = document.getElementById('product-container');
         if(!container) return;
@@ -183,7 +171,7 @@
                 <div class="card">
                     <h3>${item.name}</h3>
                     <a href="${item.link}" class="download-btn" target="_blank">DOWNLOAD</a>
-                    <div class="footer-tag">Status: Verified Safe</div>
+                    <div class="footer-tag">Cracked By Yuri</div>
                 </div>
             `;
         });
@@ -200,36 +188,7 @@
         }
     }
 
-    // FAKE LIVE ACTIVITY LOGIC
-    const fakeUsers = ["Ghost99", "SkidHunter", "YuriFan_1", "ModdedPVP", "Z3roDay", "LuvCracks", "MineHacker"];
-    const fakeActions = ["just downloaded", "verified", "started using", "is testing"];
-
-    function triggerNotification() {
-        const notify = document.getElementById('live-notification');
-        const text = document.getElementById('notify-text');
-        
-        const user = fakeUsers[Math.floor(Math.random() * fakeUsers.length)];
-        const action = fakeActions[Math.floor(Math.random() * fakeActions.length)];
-        const product = allProducts[Math.floor(Math.random() * allProducts.length)].name;
-
-        text.innerHTML = `<strong>${user}</strong> ${action} <br><span>${product}</span>`;
-        
-        notify.classList.add('show');
-        
-        // Hide after 5 seconds
-        setTimeout(() => {
-            notify.classList.remove('show');
-        }, 5000);
-
-        // Schedule next notification at a random interval (10-20 seconds)
-        const nextTime = Math.floor(Math.random() * 10000) + 10000;
-        setTimeout(triggerNotification, nextTime);
-    }
-
-    // Initialize
     displayProducts(1);
-    setTimeout(triggerNotification, 3000); // Start first notification after 3 seconds
-
 </script>
 </body>
 </html>
